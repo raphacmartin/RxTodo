@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ViewController: UIViewController {
+    // MARK: UI Components
     private var usernameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Username"
@@ -25,10 +28,9 @@ class ViewController: UIViewController {
     }()
     
     private var loginButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(configuration: .filled())
         button.setTitle("Login", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
         
         return button
     }()
@@ -43,7 +45,11 @@ class ViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: Layout constants
     private let horizontalMargin = 20.0
+    
+    // MARK: Rx Properties
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +57,17 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         
         setupView()
+        
+        Observable.combineLatest(
+            usernameTextField.rx.text.orEmpty,
+            passwordTextField.rx.text.orEmpty)
+        .map { username, password -> Bool in
+            return !username.isEmpty && !password.isEmpty
+        }
+        .subscribe(onNext: { [weak self] bothFieldsFilled in
+            self?.loginButton.isEnabled = bothFieldsFilled
+        })
+        .disposed(by: disposeBag)
     }
     
     private func setupView() {
@@ -74,3 +91,10 @@ class ViewController: UIViewController {
     }
 }
 
+extension UIButton {
+    override open var isEnabled: Bool {
+        didSet {
+            alpha = isEnabled ? 1 : 0.5
+        }
+    }
+}
