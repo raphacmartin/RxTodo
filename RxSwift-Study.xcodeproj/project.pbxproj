@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		8229652094AB6CF209E84547 /* Pods_RxSwift_Study.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992084648083D15596464A2D /* Pods_RxSwift_Study.framework */; };
+		BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */; };
+		BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */; };
 		BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E81290821AC0075E6D9 /* AppDelegate.swift */; };
 		BEB82E84290821AC0075E6D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E83290821AC0075E6D9 /* SceneDelegate.swift */; };
-		BEB82E86290821AC0075E6D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E85290821AC0075E6D9 /* ViewController.swift */; };
+		BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E85290821AC0075E6D9 /* LoginViewController.swift */; };
 		BEB82E8B290821B60075E6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB82E8A290821B60075E6D9 /* Assets.xcassets */; };
 		BEB82E8E290821B60075E6D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB82E8C290821B60075E6D9 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,10 +20,12 @@
 /* Begin PBXFileReference section */
 		97F1BE09D57C0B2CF355369F /* Pods-RxSwift-Study.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-Study.release.xcconfig"; path = "Target Support Files/Pods-RxSwift-Study/Pods-RxSwift-Study.release.xcconfig"; sourceTree = "<group>"; };
 		992084648083D15596464A2D /* Pods_RxSwift_Study.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_Study.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeBuildable.swift; sourceTree = "<group>"; };
 		BEB82E7E290821AC0075E6D9 /* RxSwift-Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-Study.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB82E81290821AC0075E6D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEB82E83290821AC0075E6D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BEB82E85290821AC0075E6D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BEB82E85290821AC0075E6D9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEB82E8A290821B60075E6D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEB82E8D290821B60075E6D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEB82E8F290821B60075E6D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,7 +58,6 @@
 				DDFD253FA1FDE57C016E64BE /* Pods-RxSwift-Study.debug.xcconfig */,
 				97F1BE09D57C0B2CF355369F /* Pods-RxSwift-Study.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,10 +84,12 @@
 			children = (
 				BEB82E81290821AC0075E6D9 /* AppDelegate.swift */,
 				BEB82E83290821AC0075E6D9 /* SceneDelegate.swift */,
-				BEB82E85290821AC0075E6D9 /* ViewController.swift */,
+				BEB82E85290821AC0075E6D9 /* LoginViewController.swift */,
+				BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */,
 				BEB82E8A290821B60075E6D9 /* Assets.xcassets */,
 				BEB82E8C290821B60075E6D9 /* LaunchScreen.storyboard */,
 				BEB82E8F290821B60075E6D9 /* Info.plist */,
+				BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */,
 			);
 			path = "RxSwift-Study";
 			sourceTree = "<group>";
@@ -203,8 +208,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEB82E86290821AC0075E6D9 /* ViewController.swift in Sources */,
+				BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */,
 				BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */,
+				BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */,
+				BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */,
 				BEB82E84290821AC0075E6D9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

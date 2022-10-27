@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.windowScene = windowScene
         
         let navigationCntroller = UINavigationController()
-        let viewController = ViewController()
+        let viewController = LoginViewController()
 
         navigationCntroller.pushViewController(viewController, animated: true)
         

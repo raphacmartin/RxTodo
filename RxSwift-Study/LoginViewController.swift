@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     // MARK: UI Components
     private var usernameTextField: UITextField = {
         let textField = UITextField()
@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "Password"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isSecureTextEntry = true
         
         return textField
     }()
@@ -30,6 +31,14 @@ class ViewController: UIViewController {
     private var loginButton: UIButton = {
         let button = UIButton(configuration: .filled())
         button.setTitle("Login", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    private var signUpButton: UIButton = {
+        let button = UIButton(configuration: .plain())
+        button.setTitle("Sign Up", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
@@ -56,7 +65,7 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        setupView()
+        buildView()
         
         Observable.combineLatest(
             usernameTextField.rx.text.orEmpty,
@@ -69,32 +78,32 @@ class ViewController: UIViewController {
         })
         .disposed(by: disposeBag)
     }
-    
-    private func setupView() {
-        setupHierarchy()
-        setupConstraints()
-    }
+}
 
-    private func setupHierarchy() {
+// MARK: View Code methods
+extension LoginViewController: ViewCodeBuildable {
+    func setupHierarchy() {
+        signUpButton.addTarget(self, action: #selector(self.goToSignup), for: .touchUpInside)
+        
         [usernameTextField,
          passwordTextField,
-         loginButton]
+         loginButton,
+         signUpButton]
             .forEach { stackView.addArrangedSubview($0) }
         
         view.addSubview(stackView)
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalMargin).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalMargin).isActive = true
     }
 }
 
-extension UIButton {
-    override open var isEnabled: Bool {
-        didSet {
-            alpha = isEnabled ? 1 : 0.5
-        }
+// MARK: Private API
+extension LoginViewController {
+    @objc func goToSignup() {
+        navigationController?.pushViewController(SignUpViewController(), animated: true)
     }
 }
