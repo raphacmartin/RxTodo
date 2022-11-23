@@ -121,25 +121,19 @@ extension LoginViewController {
         
         loginButton.rx.tap
             .withLatestFrom(credentials)
-            .flatMapLatest { [userService] username, password in
-                userService.rx.login(email: username, password: password)
+            .flatMapLatest { [weak self] username, password in                
+                return self?.userService.rx.login(email: username, password: password)
                     .asObservable()
+                    .observe(on: MainScheduler.instance)
                     .catch { error in
+                        self?.showAlert(withMessage: "We're having problems to log you in")
                         return .empty()
-                    }
+                    } ?? .empty()
             }
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] user in
-                guard let self = self else { return }
-                
                 // TODO: Go to task view
-                let alert = UIAlertController(title: "Login", message: "You are logged in :)", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
-                    alert?.dismiss(animated: true)
-                }))
-                
-                self.present(alert, animated: true)
+                self?.showAlert(withMessage: "You are logged in :)")
             })
             .disposed(by: disposeBag)
     }
