@@ -10,11 +10,26 @@ import RxSwift
 import RxCocoa
 
 class LoginViewController: UIViewController {
+    // MARK: Private properties
+    let userService: UserService
+    
+    // MARK: Initializer
+    init(userService: UserService) {
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("🔥")
+    }
+    
     // MARK: UI Components
     private var usernameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Username"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         
         return textField
     }()
@@ -67,24 +82,13 @@ class LoginViewController: UIViewController {
         
         buildView()
         
-        Observable.combineLatest(
-            usernameTextField.rx.text.orEmpty,
-            passwordTextField.rx.text.orEmpty)
-        .map { username, password -> Bool in
-            return !username.isEmpty && !password.isEmpty
-        }
-        .subscribe(onNext: { [weak self] bothFieldsFilled in
-            self?.loginButton.isEnabled = bothFieldsFilled
-        })
-        .disposed(by: disposeBag)
+        _setupBindings()
     }
 }
 
 // MARK: View Code methods
 extension LoginViewController: ViewCodeBuildable {
     func setupHierarchy() {
-        signUpButton.addTarget(self, action: #selector(self.goToSignup), for: .touchUpInside)
-        
         [usernameTextField,
          passwordTextField,
          loginButton,
@@ -103,7 +107,40 @@ extension LoginViewController: ViewCodeBuildable {
 
 // MARK: Private API
 extension LoginViewController {
-    @objc func goToSignup() {
-        navigationController?.pushViewController(SignUpViewController(), animated: true)
+    private func _setupBindings() {
+        let credentials = Observable.combineLatest(
+            usernameTextField.rx.text.orEmpty.asObservable(),
+            passwordTextField.rx.text.orEmpty.asObservable())
+        
+        credentials
+        .map { username, password -> Bool in
+            return !username.isEmpty && !password.isEmpty
+        }
+        .bind(to: loginButton.rx.isEnabled)
+        .disposed(by: disposeBag)
+        
+        loginButton.rx.tap
+            .withLatestFrom(credentials)
+            .flatMapLatest { [userService] username, password in
+                userService.rx.login(email: username, password: password)
+                    .asObservable()
+                    .catch { error in
+                        return .empty()
+                    }
+            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] user in
+                guard let self = self else { return }
+                
+                // TODO: Go to task view
+                let alert = UIAlertController(title: "Login", message: "You are logged in :)", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] _ in
+                    alert?.dismiss(animated: true)
+                }))
+                
+                self.present(alert, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }

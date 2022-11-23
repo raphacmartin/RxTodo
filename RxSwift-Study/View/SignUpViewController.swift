@@ -105,7 +105,7 @@ class SignUpViewController: UIViewController {
                 self?.registerButton.isEnabled = isLengthValid && hasNumbers && passwordAndConfirmationMatches
             })
             .disposed(by: disposeBag)
-            
+
     }
 }
 
