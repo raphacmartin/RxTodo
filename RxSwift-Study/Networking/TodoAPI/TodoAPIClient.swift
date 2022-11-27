@@ -27,12 +27,12 @@ final class TodoAPIClient: APIClient {
         request.httpMethod = endpoint.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        endpoint.headers?.forEach { key, value in
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-
         if let bearerToken = authManager.bearerToken {
             request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
+        }
+        
+        endpoint.headers?.forEach { key, value in
+            request.setValue(value, forHTTPHeaderField: key)
         }
 
         if let parameters = endpoint.bodyParameters {
