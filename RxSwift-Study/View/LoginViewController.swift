@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     // MARK: Private properties
     let userService: UserService
     
@@ -121,12 +121,19 @@ extension LoginViewController {
         
         loginButton.rx.tap
             .withLatestFrom(credentials)
-            .flatMapLatest { [weak self] username, password in                
+            .flatMapLatest { [weak self] username, password in
                 return self?.userService.rx.login(email: username, password: password)
                     .asObservable()
                     .observe(on: MainScheduler.instance)
-                    .catch { error in
-                        self?.showAlert(withMessage: "We're having problems to log you in")
+                    .catch { [weak self] error in
+                        guard let self = self else { return .empty() }
+                        var errorMessage = "We're having problems to log you in"
+                        
+                        if self.isUnauthorized(error) {
+                            errorMessage = "Wrong username or password"
+                        }
+                        
+                        self.showAlert(withMessage: errorMessage)
                         return .empty()
                     } ?? .empty()
             }
@@ -136,5 +143,12 @@ extension LoginViewController {
                 self?.showAlert(withMessage: "You are logged in :)")
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func isUnauthorized(_ error: Error) -> Bool {
+        if let error = error as? APIError, case .httpError(let statusCode) = error, statusCode == 401 {
+            return true
+        }
+        return false
     }
 }

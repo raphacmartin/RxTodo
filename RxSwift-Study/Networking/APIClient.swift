@@ -10,6 +10,8 @@ import Foundation
 enum APIError: Error {
     case invalidData
     case networkError(Error)
+    case systemError(String)
+    case httpError(Int)
 }
 
 protocol APIClient {

@@ -43,6 +43,17 @@ final class TodoAPIClient: APIClient {
             if let error = error {
                 completion(.failure(.networkError(error)))
             }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(.systemError("Response is not a HTTPURLResponse")))
+                return
+            }
+            
+            guard 200..<299 ~= httpResponse.statusCode else {
+                // TODO: Decode body response
+                completion(.failure(.httpError(httpResponse.statusCode)))
+                return
+            }
 
             guard let data = data else {
                 completion(.failure(.invalidData))
