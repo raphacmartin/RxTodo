@@ -163,6 +163,7 @@
 				BE709BFB292D157F005ADA33 /* Factory */,
 				BEB82E85290821AC0075E6D9 /* LoginViewController.swift */,
 				BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */,
+				BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -208,7 +209,6 @@
 				BEB82E8A290821B60075E6D9 /* Assets.xcassets */,
 				BEB82E8C290821B60075E6D9 /* LaunchScreen.storyboard */,
 				BEB82E8F290821B60075E6D9 /* Info.plist */,
-				BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */,
 			);
 			path = "RxSwift-Study";
 			sourceTree = "<group>";
