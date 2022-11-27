@@ -178,7 +178,7 @@ extension SignUpViewController {
     }
     
     private func checkLength(of password: String) -> Bool {
-        return 3...16 ~= password.count
+        return 6...16 ~= password.count
     }
     
     private func checkNumbersExistence(in password: String) -> Bool {
