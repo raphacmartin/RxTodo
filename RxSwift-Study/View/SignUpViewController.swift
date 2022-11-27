@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
+fileprivate let minimumValidPasswordLength = 6
+fileprivate let maximumValidPasswordLength = 16
+
 class SignUpViewController: UIViewController {
     // MARK: UI Components
     private var firstNameTextField: UITextField = {
@@ -75,7 +79,7 @@ class SignUpViewController: UIViewController {
     
     private var passwordLengthLabel: UILabel = {
         var label = UILabel()
-        label.text = "Password must contain 3 to 16 characters"
+        label.text = "Password must contain \(minimumValidPasswordLength) to \(maximumValidPasswordLength) characters"
         label.numberOfLines = 0
         return label
     }()
@@ -178,7 +182,7 @@ extension SignUpViewController {
     }
     
     private func checkLength(of password: String) -> Bool {
-        return 6...16 ~= password.count
+        return minimumValidPasswordLength...maximumValidPasswordLength ~= password.count
     }
     
     private func checkNumbersExistence(in password: String) -> Bool {
