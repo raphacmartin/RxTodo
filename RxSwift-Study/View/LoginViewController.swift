@@ -143,6 +143,13 @@ extension LoginViewController {
                 self?.showAlert(withMessage: "You are logged in :)")
             })
             .disposed(by: disposeBag)
+        
+        signUpButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.show(SignUpViewController(), sender: self)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func isUnauthorized(_ error: Error) -> Bool {
