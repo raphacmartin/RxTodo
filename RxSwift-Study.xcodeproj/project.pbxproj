@@ -23,6 +23,8 @@
 		BE709BFD292D15F2005ADA33 /* ViewControllerFactoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE709BFC292D15F2005ADA33 /* ViewControllerFactoring.swift */; };
 		BE709BFF292D1677005ADA33 /* LoginVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE709BFE292D1677005ADA33 /* LoginVCFactory.swift */; };
 		BE812AE429339F1D00F1AB94 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE812AE329339F1D00F1AB94 /* BaseViewController.swift */; };
+		BE812AE62933EB4D00F1AB94 /* SignUpVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE812AE52933EB4D00F1AB94 /* SignUpVCFactory.swift */; };
+		BE812AE82933EBB900F1AB94 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE812AE72933EBB900F1AB94 /* Environment.swift */; };
 		BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E81290821AC0075E6D9 /* AppDelegate.swift */; };
 		BEB82E84290821AC0075E6D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E83290821AC0075E6D9 /* SceneDelegate.swift */; };
 		BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E85290821AC0075E6D9 /* LoginViewController.swift */; };
@@ -49,6 +51,8 @@
 		BE709BFC292D15F2005ADA33 /* ViewControllerFactoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoring.swift; sourceTree = "<group>"; };
 		BE709BFE292D1677005ADA33 /* LoginVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCFactory.swift; sourceTree = "<group>"; };
 		BE812AE329339F1D00F1AB94 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		BE812AE52933EB4D00F1AB94 /* SignUpVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVCFactory.swift; sourceTree = "<group>"; };
+		BE812AE72933EBB900F1AB94 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		BEB82E7E290821AC0075E6D9 /* RxSwift-Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-Study.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB82E81290821AC0075E6D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEB82E83290821AC0075E6D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 			children = (
 				BE709BFC292D15F2005ADA33 /* ViewControllerFactoring.swift */,
 				BE709BFE292D1677005ADA33 /* LoginVCFactory.swift */,
+				BE812AE52933EB4D00F1AB94 /* SignUpVCFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */,
+				BE812AE72933EBB900F1AB94 /* Environment.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -348,12 +354,14 @@
 				BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */,
 				BE709BFD292D15F2005ADA33 /* ViewControllerFactoring.swift in Sources */,
 				BE613398292BB6CC00A28AE3 /* TodoAPIClient.swift in Sources */,
+				BE812AE82933EBB900F1AB94 /* Environment.swift in Sources */,
 				BE613394292BA49500A28AE3 /* UserEndpoint.swift in Sources */,
 				BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */,
 				BE709BFF292D1677005ADA33 /* LoginVCFactory.swift in Sources */,
 				BE61339B292BBDCC00A28AE3 /* UserService.swift in Sources */,
 				BEB82E84290821AC0075E6D9 /* SceneDelegate.swift in Sources */,
 				BE19CDC629297F2500273776 /* APIClient.swift in Sources */,
+				BE812AE62933EB4D00F1AB94 /* SignUpVCFactory.swift in Sources */,
 				BE19CDC929297F8300273776 /* AuthManaging.swift in Sources */,
 				BE6133A4292BC70000A28AE3 /* UserService+Rx.swift in Sources */,
 				BE6133A1292BC4FB00A28AE3 /* User+Decodable.swift in Sources */,

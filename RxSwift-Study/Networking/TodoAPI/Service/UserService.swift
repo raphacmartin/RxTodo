@@ -52,6 +52,7 @@ extension UserService {
             switch result {
             case .success(let data):
                 guard let (user, token) = self?.decodeResponse(data: data) else {
+                    completion(.failure(APIError.invalidData))
                     return
                 }
 
@@ -69,11 +70,15 @@ extension UserService {
 
 // MARK: Private API
 extension UserService {
-    private func decodeResponse(data: Data) -> (user: User, token: String)? {
-        guard let user = try? JSONDecoder().decode(User.self, from: data),
-              let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let token = jsonObject["token"] as? String else {
+    private func decodeResponse(data: Data) -> (user: User, token: String?)? {
+        guard let user = try? JSONDecoder().decode(User.self, from: data) else {
             return nil
+        }
+        
+        var token: String?
+        
+        if let jsonObject = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+            token = jsonObject["token"] as? String
         }
 
         return (user: user, token: token)

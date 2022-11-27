@@ -14,6 +14,19 @@ fileprivate let minimumValidPasswordLength = 6
 fileprivate let maximumValidPasswordLength = 16
 
 class SignUpViewController: UIViewController {
+    // MARK: Private properties
+    let userService: UserService
+    
+    // MARK: Initializer
+    init(userService: UserService) {
+        self.userService = userService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("🔥")
+    }
+    
     // MARK: UI Components
     private var firstNameTextField: UITextField = {
         let textField = UITextField()
@@ -34,6 +47,16 @@ class SignUpViewController: UIViewController {
     private var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "E-mail"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        
+        return textField
+    }()
+    
+    private var usernameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Username"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
@@ -122,6 +145,7 @@ extension SignUpViewController: ViewCodeBuildable {
             firstNameTextField,
             lastNameTextField,
             emailTextField,
+            usernameTextField,
             passwordTextField,
             confirmPasswordTextField,
             registerButton,
@@ -149,34 +173,53 @@ extension SignUpViewController {
             firstNameTextField.rx.text.orEmpty.asObservable(),
             lastNameTextField.rx.text.orEmpty.asObservable(),
             emailTextField.rx.text.orEmpty.asObservable(),
+            usernameTextField.rx.text.orEmpty.asObservable(),
             passwordTextField.rx.text.orEmpty.asObservable(),
             confirmPasswordTextField.rx.text.orEmpty.asObservable())
         
         fields
-            .map { [unowned self] firstName, lastName, email, password, passwordConfirmation in
+            .map { [unowned self] firstName, lastName, email, username, password, passwordConfirmation in
                 return (
                     !firstName.isEmpty,
                     !lastName.isEmpty,
                     !email.isEmpty,
+                    !username.isEmpty,
                     self.checkLength(of: password),
                     self.checkNumbersExistence(in: password),
                     self.checkEquality(of: password, and: passwordConfirmation)
                 )
             }
-            .subscribe(onNext: { [weak self] isFirstNameFilled, isLastNameFilled, isEmailFilled, isLengthValid, hasNumbers, passwordAndConfirmationMatches in
+            .subscribe(onNext: { [weak self] isFirstNameFilled, isLastNameFilled, isEmailFilled, isUsernameFilled, isLengthValid, hasNumbers, passwordAndConfirmationMatches in
                 self?.passwordLengthLabel.textColor = isLengthValid ? .green : .red
                 self?.passwordNumbersLabel.textColor = hasNumbers ? .green : .red
                 self?.passwordMatchLabel.textColor = passwordAndConfirmationMatches ? .green : .red
                 
-                self?.registerButton.isEnabled = isFirstNameFilled && isLastNameFilled && isEmailFilled && isLengthValid && hasNumbers && passwordAndConfirmationMatches
+                self?.registerButton.isEnabled = isFirstNameFilled && isLastNameFilled && isEmailFilled && isUsernameFilled && isLengthValid && hasNumbers && passwordAndConfirmationMatches
             })
             .disposed(by: disposeBag)
         
         registerButton.rx.tap
             .withLatestFrom(fields)
-            .subscribe(onNext: { _,_,_,_,_ in
-                // TODO: add api call
-                self.showAlert(withMessage: "Registered")
+            .flatMapLatest({ [weak self] firstName, lastName, email, username, password, _ in
+                return self?.userService.rx.register(
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    username: username,
+                    password: password)
+                .asObservable()
+                .observe(on: MainScheduler.instance)
+                .catch({ [weak self] error in
+                    guard let self = self else { return .empty() }
+                    
+                    self.showAlert(withMessage: "Something went wrong")
+                    
+                    return .empty()
+                }) ?? .empty()
+            })
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.showAlert(withMessage: "User created!")
             })
             .disposed(by: disposeBag)
     }

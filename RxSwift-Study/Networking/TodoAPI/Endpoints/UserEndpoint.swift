@@ -42,7 +42,7 @@ extension UserEndpoint.Login: Endpoint {
 
 extension UserEndpoint.Register: Endpoint {
     var path: String {
-        "\(UserEndpoint.basePath)/register"
+        "\(UserEndpoint.basePath)"
     }
     
     var method: HTTPMethod {

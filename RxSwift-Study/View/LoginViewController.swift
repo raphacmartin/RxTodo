@@ -147,7 +147,7 @@ extension LoginViewController {
         signUpButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.show(SignUpViewController(), sender: self)
+                self.show(SignUpVCFactory.make(), sender: self)
             })
             .disposed(by: disposeBag)
     }
