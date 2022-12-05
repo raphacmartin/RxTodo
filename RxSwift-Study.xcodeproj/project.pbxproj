@@ -25,6 +25,9 @@
 		BE812AE429339F1D00F1AB94 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE812AE329339F1D00F1AB94 /* BaseViewController.swift */; };
 		BE812AE62933EB4D00F1AB94 /* SignUpVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE812AE52933EB4D00F1AB94 /* SignUpVCFactory.swift */; };
 		BE812AE82933EBB900F1AB94 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE812AE72933EBB900F1AB94 /* Environment.swift */; };
+		BE991717293B93C700353D47 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE991716293B93C700353D47 /* LoginViewModel.swift */; };
+		BE991719293B942500353D47 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE991718293B942500353D47 /* ViewModel.swift */; };
+		BEA9A30E293E4C8D001EEC06 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BEA9A30D293E4C8D001EEC06 /* .gitignore */; };
 		BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E81290821AC0075E6D9 /* AppDelegate.swift */; };
 		BEB82E84290821AC0075E6D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E83290821AC0075E6D9 /* SceneDelegate.swift */; };
 		BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E85290821AC0075E6D9 /* LoginViewController.swift */; };
@@ -53,6 +56,9 @@
 		BE812AE329339F1D00F1AB94 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		BE812AE52933EB4D00F1AB94 /* SignUpVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVCFactory.swift; sourceTree = "<group>"; };
 		BE812AE72933EBB900F1AB94 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		BE991716293B93C700353D47 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		BE991718293B942500353D47 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		BEA9A30D293E4C8D001EEC06 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BEB82E7E290821AC0075E6D9 /* RxSwift-Study.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-Study.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB82E81290821AC0075E6D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEB82E83290821AC0075E6D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,14 +170,24 @@
 			path = Factory;
 			sourceTree = "<group>";
 		};
+		BE991715293B93A400353D47 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BEB82E85290821AC0075E6D9 /* LoginViewController.swift */,
+				BE991716293B93C700353D47 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		BEAF3989292822B800B4ED91 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BE991715293B93A400353D47 /* Login */,
 				BE709BFB292D157F005ADA33 /* Factory */,
-				BEB82E85290821AC0075E6D9 /* LoginViewController.swift */,
 				BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */,
 				BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */,
 				BE812AE329339F1D00F1AB94 /* BaseViewController.swift */,
+				BE991718293B942500353D47 /* ViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,6 +206,7 @@
 		BEB82E75290821AC0075E6D9 = {
 			isa = PBXGroup;
 			children = (
+				BEA9A30D293E4C8D001EEC06 /* .gitignore */,
 				BEB82E80290821AC0075E6D9 /* RxSwift-Study */,
 				BEB82E7F290821AC0075E6D9 /* Products */,
 				91EA54E4F032A75C44C20F70 /* Pods */,
@@ -291,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEB82E8E290821B60075E6D9 /* LaunchScreen.storyboard in Resources */,
+				BEA9A30E293E4C8D001EEC06 /* .gitignore in Resources */,
 				BEB82E8B290821B60075E6D9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,8 +364,10 @@
 			files = (
 				BE61339E292BC1C500A28AE3 /* User.swift in Sources */,
 				BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */,
+				BE991717293B93C700353D47 /* LoginViewModel.swift in Sources */,
 				BE613390292BA01700A28AE3 /* Endpoint.swift in Sources */,
 				BE19CDCB292980F300273776 /* AuthManager.swift in Sources */,
+				BE991719293B942500353D47 /* ViewModel.swift in Sources */,
 				BE812AE429339F1D00F1AB94 /* BaseViewController.swift in Sources */,
 				BEDBB99E292E61B5006023E9 /* UIViewController+Helper.swift in Sources */,
 				BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */,

@@ -11,12 +11,12 @@ import RxCocoa
 
 class LoginViewController: BaseViewController {
     // MARK: Private properties
-    let userService: UserService
+    let viewModel: LoginViewModel
     
     // MARK: Initializer
-    init(userService: UserService) {
-        self.userService = userService
-        super.init(nibName: nil, bundle: nil)
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -112,36 +112,45 @@ extension LoginViewController {
             usernameTextField.rx.text.orEmpty.asObservable(),
             passwordTextField.rx.text.orEmpty.asObservable())
         
-        credentials
-        .map { username, password -> Bool in
-            return !username.isEmpty && !password.isEmpty
-        }
-        .bind(to: loginButton.rx.isEnabled)
-        .disposed(by: disposeBag)
+        let input = LoginViewModel.Input(
+            credentials: credentials,
+            loginTapButtonEvent: loginButton.rx.tap.asObservable().mapTo(Void()))
         
-        loginButton.rx.tap
-            .withLatestFrom(credentials)
-            .flatMapLatest { [weak self] username, password in
-                return self?.userService.rx.login(email: username, password: password)
-                    .asObservable()
-                    .observe(on: MainScheduler.instance)
-                    .catch { [weak self] error in
-                        guard let self = self else { return .empty() }
-                        var errorMessage = "We're having problems to log you in"
-                        
-                        if self.isUnauthorized(error) {
-                            errorMessage = "Wrong username or password"
-                        }
-                        
-                        self.showAlert(withMessage: errorMessage)
-                        return .empty()
-                    } ?? .empty()
-            }
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] user in
-                // TODO: Go to task view
-                self?.showAlert(withMessage: "You are logged in :)")
+        let output = viewModel.connect(input: input)
+        
+        output.shouldEnableLoginButton
+            .drive(loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.login
+            .drive(onNext: { [weak self] response in
+                switch response {
+                case .loggedIn(_):
+                    // TODO: Go to task view
+                    self?.showAlert(withMessage: "You are logged in :)")
+                case .unauthorized:
+                    self?.showAlert(withMessage: "Wrong username or password")
+                case .error(let error):
+                    self?.showAlert(withMessage: "We're having problems to log you in")
+                    print(error.localizedDescription)
+                }
+                
             })
+            .disposed(by: disposeBag)
+
+        // TODO: Mostrar para o Mateus e depois apagar
+//        output.showLoading
+//            .drive(onNext: { [weak self] show in
+//                if show {
+//                    self?.showLoading()
+//                } else {
+//                    self?.hideLoading()
+//                }
+//            })
+//            .disposed(by: disposeBag)
+        
+        output.showLoading
+            .drive(isLoadingVisible)
             .disposed(by: disposeBag)
         
         signUpButton.rx.tap

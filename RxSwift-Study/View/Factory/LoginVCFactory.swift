@@ -12,7 +12,8 @@ class LoginVCFactory: ViewControllerFactoring {
         let apiUrl = Environment.apiUrl
         let todoApiClient = TodoAPIClient(baseURL: apiUrl)
         let userService = UserService(apiClient: todoApiClient)
+        let viewModel = LoginViewModel(userService: userService)
         
-        return LoginViewController(userService: userService)
+        return LoginViewController(viewModel: viewModel)
     }
 }
