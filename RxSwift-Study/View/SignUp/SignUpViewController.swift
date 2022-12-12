@@ -9,18 +9,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-
-fileprivate let minimumValidPasswordLength = 6
-fileprivate let maximumValidPasswordLength = 16
-
-class SignUpViewController: UIViewController {
+class SignUpViewController: BaseViewController {
     // MARK: Private properties
-    let userService: UserService
+    let viewModel: SignUpViewModel
     
     // MARK: Initializer
-    init(userService: UserService) {
-        self.userService = userService
-        super.init(nibName: nil, bundle: nil)
+    init(viewModel: SignUpViewModel) {
+        self.viewModel = viewModel
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -102,7 +98,6 @@ class SignUpViewController: UIViewController {
     
     private var passwordLengthLabel: UILabel = {
         var label = UILabel()
-        label.text = "Password must contain \(minimumValidPasswordLength) to \(maximumValidPasswordLength) characters"
         label.numberOfLines = 0
         return label
     }()
@@ -141,6 +136,9 @@ class SignUpViewController: UIViewController {
 // MARK: View Code
 extension SignUpViewController: ViewCodeBuildable {
     func setupHierarchy() {
+        let passwordLengthLabel = self.passwordLengthLabel
+        passwordLengthLabel.text = "Password must contain \(viewModel.minimumValidPasswordLength) to \(viewModel.maximumValidPasswordLength) characters"
+        
         [
             firstNameTextField,
             lastNameTextField,
@@ -169,70 +167,51 @@ extension SignUpViewController: ViewCodeBuildable {
 // MARK: Private API
 extension SignUpViewController {
     private func _setupBindings() {
-        let fields = Observable.combineLatest(
-            firstNameTextField.rx.text.orEmpty.asObservable(),
-            lastNameTextField.rx.text.orEmpty.asObservable(),
-            emailTextField.rx.text.orEmpty.asObservable(),
-            usernameTextField.rx.text.orEmpty.asObservable(),
-            passwordTextField.rx.text.orEmpty.asObservable(),
-            confirmPasswordTextField.rx.text.orEmpty.asObservable())
+        let output = viewModel.connect(input: SignUpViewModel.Input(
+            firstName: firstNameTextField.rx.text.orEmpty.asObservable(),
+            lastName: lastNameTextField.rx.text.orEmpty.asObservable(),
+            email: emailTextField.rx.text.orEmpty.asObservable(),
+            username: usernameTextField.rx.text.orEmpty.asObservable(),
+            password: passwordTextField.rx.text.orEmpty.asObservable(),
+            confirmPassword: confirmPasswordTextField.rx.text.orEmpty.asObservable(),
+            registerTapButtonEvent: registerButton.rx.tap.asObservable()))
         
-        fields
-            .map { [unowned self] firstName, lastName, email, username, password, passwordConfirmation in
-                return (
-                    !firstName.isEmpty,
-                    !lastName.isEmpty,
-                    !email.isEmpty,
-                    !username.isEmpty,
-                    self.checkLength(of: password),
-                    self.checkNumbersExistence(in: password),
-                    self.checkEquality(of: password, and: passwordConfirmation)
-                )
-            }
-            .subscribe(onNext: { [weak self] isFirstNameFilled, isLastNameFilled, isEmailFilled, isUsernameFilled, isLengthValid, hasNumbers, passwordAndConfirmationMatches in
-                self?.passwordLengthLabel.textColor = isLengthValid ? .green : .red
-                self?.passwordNumbersLabel.textColor = hasNumbers ? .green : .red
-                self?.passwordMatchLabel.textColor = passwordAndConfirmationMatches ? .green : .red
-                
-                self?.registerButton.isEnabled = isFirstNameFilled && isLastNameFilled && isEmailFilled && isUsernameFilled && isLengthValid && hasNumbers && passwordAndConfirmationMatches
-            })
+        output.isPasswordLengthValid
+            .map(self.getValidationColor)
+            .drive(passwordLengthLabel.rx.textColor)
             .disposed(by: disposeBag)
         
-        registerButton.rx.tap
-            .withLatestFrom(fields)
-            .flatMapLatest({ [weak self] firstName, lastName, email, username, password, _ in
-                return self?.userService.rx.register(
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    username: username,
-                    password: password)
-                .asObservable()
-                .observe(on: MainScheduler.instance)
-                .catch({ [weak self] error in
-                    guard let self = self else { return .empty() }
-                    
+        output.passwordHaveNumbers
+            .map(self.getValidationColor)
+            .drive(passwordNumbersLabel.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        output.passwordsMatch
+            .map(self.getValidationColor)
+            .drive(passwordMatchLabel.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        output.shouldEnableRegisterButton
+            .drive(registerButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.showLoading
+            .drive(isLoadingVisible)
+            .disposed(by: disposeBag)
+        
+        output.register
+            .drive(onNext: { response in
+                switch response {
+                case .signedUp:
+                    self.showAlert(withMessage: "User created!")
+                case .error(_):
                     self.showAlert(withMessage: "Something went wrong")
-                    
-                    return .empty()
-                }) ?? .empty()
-            })
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                self.showAlert(withMessage: "User created!")
+                }
             })
             .disposed(by: disposeBag)
     }
     
-    private func checkLength(of password: String) -> Bool {
-        return minimumValidPasswordLength...maximumValidPasswordLength ~= password.count
-    }
-    
-    private func checkNumbersExistence(in password: String) -> Bool {
-        return password.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil
-    }
-    
-    private func checkEquality(of password: String, and passwordConfirmation: String) -> Bool {
-        return !password.isEmpty && password == passwordConfirmation
+    private func getValidationColor(from isValid: Bool) -> UIColor {
+        return isValid ? .green : .red
     }
 }

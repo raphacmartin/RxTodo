@@ -11,6 +11,7 @@
 		BE19CDC629297F2500273776 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19CDC529297F2500273776 /* APIClient.swift */; };
 		BE19CDC929297F8300273776 /* AuthManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19CDC829297F8300273776 /* AuthManaging.swift */; };
 		BE19CDCB292980F300273776 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19CDCA292980F300273776 /* AuthManager.swift */; };
+		BE2B5417294682E900E974BA /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B5416294682E900E974BA /* SignUpViewModel.swift */; };
 		BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */; };
 		BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */; };
 		BE613390292BA01700A28AE3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61338F292BA01700A28AE3 /* Endpoint.swift */; };
@@ -42,6 +43,7 @@
 		BE19CDC529297F2500273776 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BE19CDC829297F8300273776 /* AuthManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManaging.swift; sourceTree = "<group>"; };
 		BE19CDCA292980F300273776 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		BE2B5416294682E900E974BA /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeBuildable.swift; sourceTree = "<group>"; };
 		BE61338F292BA01700A28AE3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -179,12 +181,21 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		BEA9A30F293E4F69001EEC06 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */,
+				BE2B5416294682E900E974BA /* SignUpViewModel.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		BEAF3989292822B800B4ED91 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BEA9A30F293E4F69001EEC06 /* SignUp */,
 				BE991715293B93A400353D47 /* Login */,
 				BE709BFB292D157F005ADA33 /* Factory */,
-				BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */,
 				BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */,
 				BE812AE329339F1D00F1AB94 /* BaseViewController.swift */,
 				BE991718293B942500353D47 /* ViewModel.swift */,
@@ -372,6 +383,7 @@
 				BEDBB99E292E61B5006023E9 /* UIViewController+Helper.swift in Sources */,
 				BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */,
 				BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */,
+				BE2B5417294682E900E974BA /* SignUpViewModel.swift in Sources */,
 				BE709BFD292D15F2005ADA33 /* ViewControllerFactoring.swift in Sources */,
 				BE613398292BB6CC00A28AE3 /* TodoAPIClient.swift in Sources */,
 				BE812AE82933EBB900F1AB94 /* Environment.swift in Sources */,

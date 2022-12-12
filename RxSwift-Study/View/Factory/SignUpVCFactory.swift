@@ -12,8 +12,9 @@ class SignUpVCFactory: ViewControllerFactoring {
         let apiUrl = Environment.apiUrl
         let todoApiClient = TodoAPIClient(baseURL: apiUrl)
         let userService = UserService(apiClient: todoApiClient)
+        let viewModel = SignUpViewModel(userService: userService)
         
-        return SignUpViewController(userService: userService)
+        return SignUpViewController(viewModel: viewModel)
     }
     
     
