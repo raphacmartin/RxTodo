@@ -126,8 +126,8 @@ extension LoginViewController {
             .drive(onNext: { [weak self] response in
                 switch response {
                 case .loggedIn(_):
-                    // TODO: Go to task view
-                    self?.showAlert(withMessage: "You are logged in :)")
+                    // TODO: Remove static call from here
+                    self?.navigationController?.setViewControllers([TasksVCFactory.make()], animated: true)
                 case .unauthorized:
                     self?.showAlert(withMessage: "Wrong username or password")
                 case .error(let error):
@@ -137,17 +137,6 @@ extension LoginViewController {
                 
             })
             .disposed(by: disposeBag)
-
-        // TODO: Mostrar para o Mateus e depois apagar
-//        output.showLoading
-//            .drive(onNext: { [weak self] show in
-//                if show {
-//                    self?.showLoading()
-//                } else {
-//                    self?.hideLoading()
-//                }
-//            })
-//            .disposed(by: disposeBag)
         
         output.showLoading
             .drive(isLoadingVisible)

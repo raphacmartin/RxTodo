@@ -8,10 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		8229652094AB6CF209E84547 /* Pods_RxSwift_Study.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992084648083D15596464A2D /* Pods_RxSwift_Study.framework */; };
+		BE0D2EF329670E730081017D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0D2EF229670E730081017D /* TaskTableViewCell.swift */; };
+		BE0D2EF529671FA60081017D /* Task+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0D2EF429671FA60081017D /* Task+Decodable.swift */; };
+		BE0D2EF9296722350081017D /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0D2EF8296722350081017D /* TaskService.swift */; };
+		BE0D2EFB296722C30081017D /* TaskEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0D2EFA296722C30081017D /* TaskEndpoint.swift */; };
 		BE19CDC629297F2500273776 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19CDC529297F2500273776 /* APIClient.swift */; };
 		BE19CDC929297F8300273776 /* AuthManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19CDC829297F8300273776 /* AuthManaging.swift */; };
 		BE19CDCB292980F300273776 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19CDCA292980F300273776 /* AuthManager.swift */; };
+		BE1CA45D296B88B2005E2F14 /* TaskService+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA45C296B88B2005E2F14 /* TaskService+Rx.swift */; };
+		BE1CA45F296B8EA6005E2F14 /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA45E296B8EA6005E2F14 /* TasksViewModel.swift */; };
 		BE2B5417294682E900E974BA /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B5416294682E900E974BA /* SignUpViewModel.swift */; };
+		BE3F42C529660BFD001A41EE /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F42C429660BFD001A41EE /* TasksViewController.swift */; };
+		BE3F42C7296615BC001A41EE /* TasksVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */; };
 		BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */; };
 		BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */; };
 		BE613390292BA01700A28AE3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61338F292BA01700A28AE3 /* Endpoint.swift */; };
@@ -35,15 +43,24 @@
 		BEB82E8B290821B60075E6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB82E8A290821B60075E6D9 /* Assets.xcassets */; };
 		BEB82E8E290821B60075E6D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB82E8C290821B60075E6D9 /* LaunchScreen.storyboard */; };
 		BEDBB99E292E61B5006023E9 /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */; };
+		BEE3F681295DF82100CFB3AB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F680295DF82100CFB3AB /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		97F1BE09D57C0B2CF355369F /* Pods-RxSwift-Study.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-Study.release.xcconfig"; path = "Target Support Files/Pods-RxSwift-Study/Pods-RxSwift-Study.release.xcconfig"; sourceTree = "<group>"; };
 		992084648083D15596464A2D /* Pods_RxSwift_Study.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_Study.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE0D2EF229670E730081017D /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		BE0D2EF429671FA60081017D /* Task+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Decodable.swift"; sourceTree = "<group>"; };
+		BE0D2EF8296722350081017D /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
+		BE0D2EFA296722C30081017D /* TaskEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEndpoint.swift; sourceTree = "<group>"; };
 		BE19CDC529297F2500273776 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BE19CDC829297F8300273776 /* AuthManaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManaging.swift; sourceTree = "<group>"; };
 		BE19CDCA292980F300273776 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		BE1CA45C296B88B2005E2F14 /* TaskService+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskService+Rx.swift"; sourceTree = "<group>"; };
+		BE1CA45E296B8EA6005E2F14 /* TasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
 		BE2B5416294682E900E974BA /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		BE3F42C429660BFD001A41EE /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksVCFactory.swift; sourceTree = "<group>"; };
 		BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeBuildable.swift; sourceTree = "<group>"; };
 		BE61338F292BA01700A28AE3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -69,6 +86,7 @@
 		BEB82E8D290821B60075E6D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEB82E8F290821B60075E6D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helper.swift"; sourceTree = "<group>"; };
+		BEE3F680295DF82100CFB3AB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		DDFD253FA1FDE57C016E64BE /* Pods-RxSwift-Study.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-Study.debug.xcconfig"; path = "Target Support Files/Pods-RxSwift-Study/Pods-RxSwift-Study.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +128,16 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		BE3F42C02965D51D001A41EE /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				BE3F42C429660BFD001A41EE /* TasksViewController.swift */,
+				BE0D2EF229670E730081017D /* TaskTableViewCell.swift */,
+				BE1CA45E296B8EA6005E2F14 /* TasksViewModel.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		BE613391292BA47300A28AE3 /* TodoAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				BE613393292BA49500A28AE3 /* UserEndpoint.swift */,
+				BE0D2EFA296722C30081017D /* TaskEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -134,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				BE61339A292BBDCC00A28AE3 /* UserService.swift */,
+				BE0D2EF8296722350081017D /* TaskService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -142,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				BE61339D292BC1C500A28AE3 /* User.swift */,
+				BEE3F680295DF82100CFB3AB /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				BE6133A0292BC4FB00A28AE3 /* User+Decodable.swift */,
+				BE0D2EF429671FA60081017D /* Task+Decodable.swift */,
 			);
 			path = DecodableModel;
 			sourceTree = "<group>";
@@ -158,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				BE6133A3292BC70000A28AE3 /* UserService+Rx.swift */,
+				BE1CA45C296B88B2005E2F14 /* TaskService+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -168,6 +201,7 @@
 				BE709BFC292D15F2005ADA33 /* ViewControllerFactoring.swift */,
 				BE709BFE292D1677005ADA33 /* LoginVCFactory.swift */,
 				BE812AE52933EB4D00F1AB94 /* SignUpVCFactory.swift */,
+				BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -193,6 +227,7 @@
 		BEAF3989292822B800B4ED91 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BE3F42C02965D51D001A41EE /* Tasks */,
 				BEA9A30F293E4F69001EEC06 /* SignUp */,
 				BE991715293B93A400353D47 /* Login */,
 				BE709BFB292D157F005ADA33 /* Factory */,
@@ -292,6 +327,7 @@
 				TargetAttributes = {
 					BEB82E7D290821AC0075E6D9 = {
 						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1410;
 					};
 				};
 			};
@@ -373,28 +409,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE0D2EF329670E730081017D /* TaskTableViewCell.swift in Sources */,
 				BE61339E292BC1C500A28AE3 /* User.swift in Sources */,
 				BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */,
 				BE991717293B93C700353D47 /* LoginViewModel.swift in Sources */,
 				BE613390292BA01700A28AE3 /* Endpoint.swift in Sources */,
 				BE19CDCB292980F300273776 /* AuthManager.swift in Sources */,
+				BE3F42C529660BFD001A41EE /* TasksViewController.swift in Sources */,
 				BE991719293B942500353D47 /* ViewModel.swift in Sources */,
+				BE1CA45D296B88B2005E2F14 /* TaskService+Rx.swift in Sources */,
 				BE812AE429339F1D00F1AB94 /* BaseViewController.swift in Sources */,
+				BE1CA45F296B8EA6005E2F14 /* TasksViewModel.swift in Sources */,
 				BEDBB99E292E61B5006023E9 /* UIViewController+Helper.swift in Sources */,
 				BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */,
 				BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */,
 				BE2B5417294682E900E974BA /* SignUpViewModel.swift in Sources */,
 				BE709BFD292D15F2005ADA33 /* ViewControllerFactoring.swift in Sources */,
+				BE0D2EF529671FA60081017D /* Task+Decodable.swift in Sources */,
+				BEE3F681295DF82100CFB3AB /* Task.swift in Sources */,
+				BE0D2EFB296722C30081017D /* TaskEndpoint.swift in Sources */,
 				BE613398292BB6CC00A28AE3 /* TodoAPIClient.swift in Sources */,
 				BE812AE82933EBB900F1AB94 /* Environment.swift in Sources */,
 				BE613394292BA49500A28AE3 /* UserEndpoint.swift in Sources */,
 				BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */,
+				BE0D2EF9296722350081017D /* TaskService.swift in Sources */,
 				BE709BFF292D1677005ADA33 /* LoginVCFactory.swift in Sources */,
 				BE61339B292BBDCC00A28AE3 /* UserService.swift in Sources */,
 				BEB82E84290821AC0075E6D9 /* SceneDelegate.swift in Sources */,
 				BE19CDC629297F2500273776 /* APIClient.swift in Sources */,
 				BE812AE62933EB4D00F1AB94 /* SignUpVCFactory.swift in Sources */,
 				BE19CDC929297F8300273776 /* AuthManaging.swift in Sources */,
+				BE3F42C7296615BC001A41EE /* TasksVCFactory.swift in Sources */,
 				BE6133A4292BC70000A28AE3 /* UserService+Rx.swift in Sources */,
 				BE6133A1292BC4FB00A28AE3 /* User+Decodable.swift in Sources */,
 			);
@@ -535,6 +580,7 @@
 				API_URL = "http://todo.mateusbrigido.com/api/v1";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -551,6 +597,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.raphael.RxSwift-Study";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -563,6 +610,7 @@
 				API_URL = "http://todo.mateusbrigido.com/api/v1";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
