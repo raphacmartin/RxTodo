@@ -23,7 +23,6 @@ class TasksEndpoint {
         
         var bodyParameters: [String : Any?]? {
             [
-                // TODO:
                 "dueDate": task.dueDate.toJson(),
                 "description": task.description,
                 "completed": task.completed
