@@ -39,7 +39,6 @@ extension TasksViewModel: ViewModel {
     func connect(input: Input) -> Output {
         let taskCompleted = input.completeTask
             .flatMap { task in
-                // TODO: catch
                 self.taskService.rx.update(task: task)
                     .asObservable()
                     .map { TaskResponse.success($0) }
