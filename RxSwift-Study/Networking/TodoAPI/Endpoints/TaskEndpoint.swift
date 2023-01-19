@@ -11,4 +11,23 @@ class TasksEndpoint {
         
         var method: HTTPMethod = .GET
     }
+    
+    struct Update: Endpoint{
+        var path: String {
+            "/tasks/\(task.id)"
+        }
+        
+        var method: HTTPMethod = .PATCH
+        
+        var task: Task
+        
+        var bodyParameters: [String : Any?]? {
+            [
+                // TODO:
+                "dueDate": task.dueDate.toJson(),
+                "description": task.description,
+                "completed": task.completed
+            ]
+        }
+    }
 }

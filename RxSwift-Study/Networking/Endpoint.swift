@@ -10,6 +10,7 @@ enum HTTPMethod: String {
     case POST
     case DELETE
     case PUT
+    case PATCH
 }
 
 protocol Endpoint {

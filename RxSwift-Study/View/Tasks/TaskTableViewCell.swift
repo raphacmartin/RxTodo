@@ -63,6 +63,7 @@ class TaskTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        completedSwitch.isOn = false
     }
 
     public func configure(with task: Task) {

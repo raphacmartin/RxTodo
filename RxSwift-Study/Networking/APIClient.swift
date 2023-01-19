@@ -7,11 +7,24 @@
 
 import Foundation
 
-enum APIError: Error {
+enum APIError: LocalizedError {
     case invalidData
     case networkError(Error)
     case systemError(String)
     case httpError(Int)
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidData:
+            return "Invalid data"
+        case .systemError(let msg):
+            return msg
+        case .httpError(let code):
+            return "Http Response Code: \(code)"
+        default:
+            return self.localizedDescription
+        }
+    }
 }
 
 protocol APIClient {

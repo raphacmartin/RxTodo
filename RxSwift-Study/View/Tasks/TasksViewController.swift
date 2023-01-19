@@ -16,6 +16,7 @@ class TasksViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private let completeTask = PublishRelay<Task>()
     private let deleteTask = PublishRelay<Task>()
+    private let reloadTasks = PublishRelay<Void>()
     
     // MARK: Initializer
     init(viewModel: TasksViewModel) {
@@ -45,6 +46,8 @@ class TasksViewController: BaseViewController {
         buildView()
         
         setupBindings()
+        
+        reloadTasks.accept(Void())
     }
 
 }
@@ -92,11 +95,11 @@ extension TasksViewController: UITableViewDataSource {
 // MARK: Private API
 extension TasksViewController {
     private func setupBindings() {
-        let input = TasksViewModel.Input(completeTask: completeTask.asObservable(), deleteTask: deleteTask.asObservable())
+        let input = TasksViewModel.Input(completeTask: completeTask.asObservable(), deleteTask: deleteTask.asObservable(), reloadTasks: reloadTasks.asObservable())
         
         let output = viewModel.connect(input: input)
         
-        output.loadTasks
+        output.tasks
             .drive(onNext: { [weak self] tasks in
                 self?.tasks = tasks
                 self?.tasksTableView.reloadData()
@@ -104,9 +107,14 @@ extension TasksViewController {
             .disposed(by: disposeBag)
         
         output.taskCompleted
-            .drive(onNext: { task in
-                let state = task.completed ? "completed" : "uncompleted"
-                self.showAlert(withMessage: "Task \(task.description) marked as \(state)")
+            .asObservable()
+            .subscribe(onNext: { [weak self] result in
+                switch result {
+                case .success(_):
+                    self?.reloadTasks.accept(Void())
+                case .error(let error):
+                    self?.showAlert(withMessage: error.localizedDescription, withTitle: "Error")
+                }
             })
             .disposed(by: disposeBag)
         

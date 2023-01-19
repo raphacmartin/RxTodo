@@ -26,7 +26,7 @@ extension TaskService {
         return apiClient.request(from: endpoint) { [weak self] result in
             switch result {
             case .success(let data):
-                guard let tasks = self?.decodeResponse(data: data) else {
+                guard let tasks = self?.decodeListResponse(data: data) else {
                     completion(.failure(APIError.invalidData))
                     return
                 }
@@ -37,11 +37,29 @@ extension TaskService {
             }
         }
     }
+    
+    public func update(task: Task, completion: @escaping (Result<Task, Error>) -> Void) -> URLSessionTask {
+        let endpoint = TasksEndpoint.Update(task: task)
+        
+        return apiClient.request(from: endpoint) { result in
+            switch result {
+            case .success(let data):
+                guard let task = self.decodeTaskResponse(data: data) else {
+                    completion(.failure(APIError.invalidData))
+                    return
+                }
+                
+                completion(.success(task))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 // MARK: Private API
 extension TaskService {
-    private func decodeResponse(data: Data) -> [Task]? {
+    private func decodeListResponse(data: Data) -> [Task]? {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         
@@ -49,6 +67,23 @@ extension TaskService {
             
             if let jsonData = String(data: data, encoding: .utf8) {
                 print("Error decoding data to array of tasks: ")
+                print(jsonData)
+            }
+            
+            return nil
+        }
+        
+        return task
+    }
+    
+    private func decodeTaskResponse(data: Data) -> Task? {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        guard let task = try? decoder.decode(Task.self, from: data) else {
+            
+            if let jsonData = String(data: data, encoding: .utf8) {
+                print("Error decoding data to a task: ")
                 print(jsonData)
             }
             

@@ -42,6 +42,7 @@
 		BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB82E85290821AC0075E6D9 /* LoginViewController.swift */; };
 		BEB82E8B290821B60075E6D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB82E8A290821B60075E6D9 /* Assets.xcassets */; };
 		BEB82E8E290821B60075E6D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB82E8C290821B60075E6D9 /* LaunchScreen.storyboard */; };
+		BECCB21B2979772B000E347D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECCB21A2979772B000E347D /* Extensions.swift */; };
 		BEDBB99E292E61B5006023E9 /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */; };
 		BEE3F681295DF82100CFB3AB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F680295DF82100CFB3AB /* Task.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		BEB82E8A290821B60075E6D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEB82E8D290821B60075E6D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEB82E8F290821B60075E6D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BECCB21A2979772B000E347D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helper.swift"; sourceTree = "<group>"; };
 		BEE3F680295DF82100CFB3AB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		DDFD253FA1FDE57C016E64BE /* Pods-RxSwift-Study.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-Study.debug.xcconfig"; path = "Target Support Files/Pods-RxSwift-Study/Pods-RxSwift-Study.debug.xcconfig"; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			children = (
 				BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */,
 				BE812AE72933EBB900F1AB94 /* Environment.swift */,
+				BECCB21A2979772B000E347D /* Extensions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				BE812AE62933EB4D00F1AB94 /* SignUpVCFactory.swift in Sources */,
 				BE19CDC929297F8300273776 /* AuthManaging.swift in Sources */,
 				BE3F42C7296615BC001A41EE /* TasksVCFactory.swift in Sources */,
+				BECCB21B2979772B000E347D /* Extensions.swift in Sources */,
 				BE6133A4292BC70000A28AE3 /* UserService+Rx.swift in Sources */,
 				BE6133A1292BC4FB00A28AE3 /* User+Decodable.swift in Sources */,
 			);
