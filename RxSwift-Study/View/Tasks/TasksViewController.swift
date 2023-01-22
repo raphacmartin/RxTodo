@@ -38,6 +38,15 @@ class TasksViewController: BaseViewController {
         return tableView
     }()
     
+    private lazy var addBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(systemItem: .add)
+        barButtonItem.primaryAction = UIAction(handler: { [unowned self] _ in
+            self.present(NewTaskVCFactory.make(), animated: true)
+        })
+
+        return barButtonItem
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +65,8 @@ class TasksViewController: BaseViewController {
 extension TasksViewController: ViewCodeBuildable {
     func setupHierarchy() {
         view.addSubview(tasksTableView)
+        
+        navigationItem.rightBarButtonItem = addBarButtonItem
     }
     
     func setupConstraints() {
