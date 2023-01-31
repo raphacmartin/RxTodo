@@ -40,8 +40,9 @@ class TasksViewController: BaseViewController {
     
     private lazy var addBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(systemItem: .add)
+        
         barButtonItem.primaryAction = UIAction(handler: { [unowned self] _ in
-            self.present(NewTaskVCFactory.make(), animated: true)
+            self.presentNewTask()
         })
 
         return barButtonItem
@@ -58,7 +59,6 @@ class TasksViewController: BaseViewController {
         
         reloadTasks.accept(Void())
     }
-
 }
 
 // MARK: View Code methods
@@ -134,5 +134,15 @@ extension TasksViewController {
                 self.showAlert(withMessage: "Task \(task.description) tapped to delete")
             })
             .disposed(by: disposeBag)
+    }
+    
+    func presentNewTask() {
+        let newTaskVC = NewTaskVCFactory.make()
+        
+        newTaskVC.dismissed
+            .bind(to: reloadTasks)
+            .disposed(by: newTaskVC.disposeBag)
+        
+        self.present(newTaskVC, animated: true)
     }
 }

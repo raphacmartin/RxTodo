@@ -9,7 +9,10 @@ import UIKit
 
 final class NewTaskVCFactory: ViewControllerFactoring {
     public static func make() -> NewTaskViewController {
-        let viewModel = NewTaskViewModel()
+        let apiUrl = Environment.apiUrl
+        let todoApiClient = TodoAPIClient(baseURL: apiUrl)
+        let service = TaskService(apiClient: todoApiClient)
+        let viewModel = NewTaskViewModel(taskService: service)
         return NewTaskViewController(viewModel: viewModel)
     }   
 }

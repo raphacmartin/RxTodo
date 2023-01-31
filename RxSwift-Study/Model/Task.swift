@@ -8,7 +8,7 @@
 import Foundation
 
 struct Task {
-    var id: String
+    var id: String? = nil
     var dueDate: Date
     var description: String
     var completed: Bool

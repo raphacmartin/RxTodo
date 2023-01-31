@@ -14,10 +14,31 @@ class TasksEndpoint {
     
     struct Update: Endpoint{
         var path: String {
-            "/tasks/\(task.id)"
+            guard let taskId = task.id else {
+                fatalError("Trying to update task without id")
+            }
+            return "/tasks/\(taskId)"
         }
         
         var method: HTTPMethod = .PATCH
+        
+        var task: Task
+        
+        var bodyParameters: [String : Any?]? {
+            [
+                "dueDate": task.dueDate.toJson(),
+                "description": task.description,
+                "completed": task.completed
+            ]
+        }
+    }
+    
+    struct Add: Endpoint{
+        var path: String {
+            "/tasks"
+        }
+        
+        var method: HTTPMethod = .POST
         
         var task: Task
         

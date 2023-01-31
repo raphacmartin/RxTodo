@@ -33,4 +33,16 @@ extension Reactive where Base: TaskService {
             }
         }
     }
+    
+    func add(task: Task) -> Single<Task> {
+        Single.create { single in
+            let networkTask = base.add(task: task) { result in
+                single(result)
+            }
+            
+            return Disposables.create {
+                networkTask.cancel()
+            }
+        }
+    }
 }

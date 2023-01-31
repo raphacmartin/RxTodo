@@ -5,12 +5,21 @@
 //  Created by Raphael Martin on 20/01/23.
 //
 
+import RxRelay
+import RxSwift
 import UIKit
 
 final class NewTaskViewController: BaseViewController {
     // MARK: Private properties
     private let viewModel: NewTaskViewModel
     private let horizontalMargin = 20.0
+    private let dismissRelay = PublishRelay<Void>()
+    
+    // MARK: Public properties
+    public var dismissed: Observable<Void> {
+        dismissRelay.asObservable()
+    }
+    public let disposeBag = DisposeBag()
     
     // MARK: Initializer
     init(viewModel: NewTaskViewModel) {
@@ -22,8 +31,12 @@ final class NewTaskViewController: BaseViewController {
         fatalError("🔥")
     }
     
+    deinit {
+        print("New Task deinitializated")
+    }
+    
     // MARK: UI Components
-    private lazy var screenTitle: UILabel = {
+    private lazy var screenTitleLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Create New Task"
@@ -42,6 +55,16 @@ final class NewTaskViewController: BaseViewController {
         textField.autocapitalizationType = .none
         
         return textField
+    }()
+    
+    private lazy var minCharLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "Minimum 3 characters"
+        label.font = UIFont.italicSystemFont(ofSize: 12.0)
+        label.textColor = .darkGray
+        
+        return label
     }()
     
     private var addButton: UIButton = {
@@ -81,6 +104,13 @@ extension NewTaskViewController {
         buildView()
         
         descriptionTextField.becomeFirstResponder()
+        
+        setupBindings()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.dismissRelay.accept(Void())
     }
 }
 
@@ -88,8 +118,9 @@ extension NewTaskViewController {
 extension NewTaskViewController: ViewCodeBuildable {
     func setupHierarchy() {
         [
-            screenTitle,
+            screenTitleLabel,
             descriptionTextField,
+            minCharLabel,
             addButton,
             cancelButton
         ].forEach {
@@ -103,5 +134,40 @@ extension NewTaskViewController: ViewCodeBuildable {
         stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.0).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalMargin).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalMargin).isActive = true
+    }
+}
+
+// MARK: Private API
+extension NewTaskViewController {
+    private func setupBindings() {
+        let input = NewTaskViewModel.Input(
+            description: descriptionTextField.rx.text.orEmpty.asObservable(),
+            addTask: addButton.rx.tap.asObservable())
+        
+        let output = viewModel.connect(input: input)
+        
+        output.shouldEnableAddButton
+            .asObservable()
+            .bind(to: addButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        cancelButton.rx
+            .tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        output.taskAdded
+            .asObservable()
+            .subscribe(onNext: { [weak self] response in
+                switch response {
+                case .success(_):
+                    self?.dismiss(animated: true)
+                case .error(let error):
+                    self?.showAlert(withMessage: error.localizedDescription, withTitle: "Error")
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
