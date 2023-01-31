@@ -83,6 +83,13 @@ class LoginViewController: BaseViewController {
         buildView()
         
         _setupBindings()
+        
+        #if DEBUG
+        usernameTextField.text = "john.doe"
+        passwordTextField.text = "123456789"
+        usernameTextField.sendActions(for: .valueChanged)
+        passwordTextField.sendActions(for: .valueChanged)
+        #endif
     }
 }
 

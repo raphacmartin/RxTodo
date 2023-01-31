@@ -20,6 +20,9 @@
 		BE2B5417294682E900E974BA /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B5416294682E900E974BA /* SignUpViewModel.swift */; };
 		BE3F42C529660BFD001A41EE /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F42C429660BFD001A41EE /* TasksViewController.swift */; };
 		BE3F42C7296615BC001A41EE /* TasksVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */; };
+		BE46FDCE297B25AD003FABF2 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46FDCD297B25AD003FABF2 /* NewTaskViewController.swift */; };
+		BE46FDD0297B25E3003FABF2 /* NewTaskVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46FDCF297B25E3003FABF2 /* NewTaskVCFactory.swift */; };
+		BE4CC0ED297D74FF00194B74 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4CC0EC297D74FF00194B74 /* NewTaskViewModel.swift */; };
 		BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */; };
 		BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */; };
 		BE613390292BA01700A28AE3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61338F292BA01700A28AE3 /* Endpoint.swift */; };
@@ -62,6 +65,9 @@
 		BE2B5416294682E900E974BA /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		BE3F42C429660BFD001A41EE /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksVCFactory.swift; sourceTree = "<group>"; };
+		BE46FDCD297B25AD003FABF2 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
+		BE46FDCF297B25E3003FABF2 /* NewTaskVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskVCFactory.swift; sourceTree = "<group>"; };
+		BE4CC0EC297D74FF00194B74 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
 		BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeBuildable.swift; sourceTree = "<group>"; };
 		BE61338F292BA01700A28AE3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -133,11 +139,21 @@
 		BE3F42C02965D51D001A41EE /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				BE4CC0EB297D74E600194B74 /* NewTask */,
 				BE3F42C429660BFD001A41EE /* TasksViewController.swift */,
 				BE0D2EF229670E730081017D /* TaskTableViewCell.swift */,
 				BE1CA45E296B8EA6005E2F14 /* TasksViewModel.swift */,
 			);
 			path = Tasks;
+			sourceTree = "<group>";
+		};
+		BE4CC0EB297D74E600194B74 /* NewTask */ = {
+			isa = PBXGroup;
+			children = (
+				BE46FDCD297B25AD003FABF2 /* NewTaskViewController.swift */,
+				BE4CC0EC297D74FF00194B74 /* NewTaskViewModel.swift */,
+			);
+			path = NewTask;
 			sourceTree = "<group>";
 		};
 		BE613391292BA47300A28AE3 /* TodoAPI */ = {
@@ -204,6 +220,7 @@
 				BE709BFE292D1677005ADA33 /* LoginVCFactory.swift */,
 				BE812AE52933EB4D00F1AB94 /* SignUpVCFactory.swift */,
 				BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */,
+				BE46FDCF297B25E3003FABF2 /* NewTaskVCFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -413,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE0D2EF329670E730081017D /* TaskTableViewCell.swift in Sources */,
+				BE46FDCE297B25AD003FABF2 /* NewTaskViewController.swift in Sources */,
 				BE61339E292BC1C500A28AE3 /* User.swift in Sources */,
 				BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */,
 				BE991717293B93C700353D47 /* LoginViewModel.swift in Sources */,
@@ -424,8 +442,10 @@
 				BE812AE429339F1D00F1AB94 /* BaseViewController.swift in Sources */,
 				BE1CA45F296B8EA6005E2F14 /* TasksViewModel.swift in Sources */,
 				BEDBB99E292E61B5006023E9 /* UIViewController+Helper.swift in Sources */,
+				BE4CC0ED297D74FF00194B74 /* NewTaskViewModel.swift in Sources */,
 				BEB82E82290821AC0075E6D9 /* AppDelegate.swift in Sources */,
 				BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */,
+				BE46FDD0297B25E3003FABF2 /* NewTaskVCFactory.swift in Sources */,
 				BE2B5417294682E900E974BA /* SignUpViewModel.swift in Sources */,
 				BE709BFD292D15F2005ADA33 /* ViewControllerFactoring.swift in Sources */,
 				BE0D2EF529671FA60081017D /* Task+Decodable.swift in Sources */,

@@ -55,6 +55,24 @@ extension TaskService {
             }
         }
     }
+    
+    public func add(task: Task, completion: @escaping (Result<Task, Error>) -> Void) -> URLSessionTask {
+        let endpoint = TasksEndpoint.Add(task: task)
+        
+        return apiClient.request(from: endpoint) { result in
+            switch result {
+            case .success(let data):
+                guard let task = self.decodeTaskResponse(data: data) else {
+                    completion(.failure(APIError.invalidData))
+                    return
+                }
+                
+                completion(.success(task))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 // MARK: Private API
