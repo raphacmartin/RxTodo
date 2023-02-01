@@ -9,7 +9,9 @@ class TasksEndpoint {
     struct GetTasks: Endpoint {
         var path: String = "/tasks"
         
-        var method: HTTPMethod = .GET
+        var method: HTTPMethod {
+            .GET
+        }
     }
     
     struct Update: Endpoint{
@@ -20,7 +22,9 @@ class TasksEndpoint {
             return "/tasks/\(taskId)"
         }
         
-        var method: HTTPMethod = .PATCH
+        var method: HTTPMethod {
+            .PATCH
+        }
         
         var task: Task
         
@@ -38,7 +42,9 @@ class TasksEndpoint {
             "/tasks"
         }
         
-        var method: HTTPMethod = .POST
+        var method: HTTPMethod {
+            .POST
+        }
         
         var task: Task
         
