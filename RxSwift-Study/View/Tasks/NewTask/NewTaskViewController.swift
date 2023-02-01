@@ -31,10 +31,6 @@ final class NewTaskViewController: BaseViewController {
         fatalError("🔥")
     }
     
-    deinit {
-        print("New Task deinitializated")
-    }
-    
     // MARK: UI Components
     private lazy var screenTitleLabel: UILabel = {
         let label = UILabel()
