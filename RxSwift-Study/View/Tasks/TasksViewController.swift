@@ -130,9 +130,18 @@ extension TasksViewController {
             .disposed(by: disposeBag)
         
         output.taskDeleted
-            .drive(onNext: { task in
-                self.showAlert(withMessage: "Task \(task.description) tapped to delete")
+            .drive(onNext: { [weak self] result in
+                switch result {
+                case .success(_):
+                    self?.reloadTasks.accept(Void())
+                case .error(let error):
+                    self?.showAlert(withMessage: error.localizedDescription, withTitle: "Error")
+                }
             })
+            .disposed(by: disposeBag)
+        
+        output.showLoading
+            .drive(isLoadingVisible)
             .disposed(by: disposeBag)
     }
     
