@@ -32,13 +32,14 @@ extension TasksViewModel: ViewModel {
     struct Output {
         let tasks: Driver<[Task]>
         let taskCompleted: Driver<TaskResponse>
-        let taskDeleted: Driver<Task>
+        let taskDeleted: Driver<TaskResponse>
+        let showLoading: Driver<Bool>
     }
     
     
     func connect(input: Input) -> Output {
         let taskCompleted = input.completeTask
-            .flatMap { task in
+            .flatMapLatest { task in
                 self.taskService.rx.update(task: task)
                     .asObservable()
                     .map { TaskResponse.success($0) }
@@ -48,21 +49,30 @@ extension TasksViewModel: ViewModel {
             }
         
         let taskDeleted = input.deleteTask
-//            .flatMap { task in
-//                // TODO: Call service method
-//            }
+            .flatMapLatest { task in
+                self.taskService.rx.delete(task: task)
+                    .asObservable()
+                    .map { TaskResponse.success($0) }
+                    .catch { error in
+                        return Observable.just(.error(error))
+                    }
+            }
+        
+        let showLoading = Observable.merge(
+            input.deleteTask.mapTo(true),
+            taskDeleted.mapTo(false)
+        )
         
         let tasks = input.reloadTasks
             .flatMapLatest { [taskService] _ in
                 return taskService.rx.getAll()
             }
         
-        let task = Task(id: "", dueDate: Date(), description: "", completed: false)
-        
         return Output(
             tasks: tasks.asDriver(onErrorJustReturn: []),
             taskCompleted: taskCompleted.asDriver(onErrorJustReturn: .error(APIError.systemError("Error on updating task"))),
-            taskDeleted: taskDeleted.asDriver(onErrorJustReturn: task)
+            taskDeleted: taskDeleted.asDriver(onErrorJustReturn: .error(APIError.systemError("Error on deleting task"))),
+            showLoading: showLoading.asDriver(onErrorJustReturn: false)
         )
     }
 }
