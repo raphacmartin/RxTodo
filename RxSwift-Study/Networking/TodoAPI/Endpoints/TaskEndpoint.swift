@@ -56,4 +56,19 @@ class TasksEndpoint {
             ]
         }
     }
+    
+    struct Delete: Endpoint {
+        var path: String {
+            guard let taskId = id else {
+                fatalError("Trying to update task without id")
+            }
+            return "/tasks/\(taskId)"
+        }
+        
+        var method: HTTPMethod {
+            .DELETE
+        }
+        
+        let id: String?
+    }
 }
