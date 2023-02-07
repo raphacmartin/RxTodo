@@ -14,6 +14,7 @@ final class NewTaskViewController: BaseViewController {
     private let viewModel: NewTaskViewModel
     private let horizontalMargin = 20.0
     private let dismissRelay = PublishRelay<Void>()
+    private var editingTask = BehaviorRelay<Task?>(value: nil)
     
     // MARK: Public properties
     public var dismissed: Observable<Void> {
@@ -138,7 +139,11 @@ extension NewTaskViewController {
     private func setupBindings() {
         let input = NewTaskViewModel.Input(
             description: descriptionTextField.rx.text.orEmpty.asObservable(),
-            addTask: addButton.rx.tap.asObservable())
+            addTask: addButton.rx
+                .tap
+                .withLatestFrom(editingTask)
+                .asObservable()
+        )
         
         let output = viewModel.connect(input: input)
         
@@ -165,5 +170,32 @@ extension NewTaskViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        editingTask
+            .subscribe(onNext: { [weak self] task in
+                guard let self = self else { return }
+                
+                if let task = task {
+                    self.descriptionTextField.text = task.description
+                    self.screenTitleLabel.text = "Edit Task"
+                    self.addButton.setTitle("Save", for: .normal)
+                } else {
+                    self.descriptionTextField.text = ""
+                    self.screenTitleLabel.text = "Create New Task"
+                    self.addButton.setTitle("Add", for: .normal)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: Public methods
+extension NewTaskViewController {
+    /// Set the state of the form to editing with the received task
+    ///
+    ///  - Parameters:
+    ///     - task: The task to be editer
+    public func setEditing(task: Task?) {
+        self.editingTask.accept(task)
     }
 }

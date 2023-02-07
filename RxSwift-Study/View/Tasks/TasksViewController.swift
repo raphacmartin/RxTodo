@@ -34,6 +34,7 @@ class TasksViewController: BaseViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: String(describing: TaskTableViewCell.self))
         return tableView
     }()
@@ -77,6 +78,7 @@ extension TasksViewController: ViewCodeBuildable {
     }
 }
 
+// MARK: UITableViewDataSource
 extension TasksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
@@ -103,6 +105,14 @@ extension TasksViewController: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate
+extension TasksViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let taskToEdit = tasks[indexPath.row]
+        presentNewTask(editing: taskToEdit)
+    }
+}
+
 // MARK: Private API
 extension TasksViewController {
     private func setupBindings() {
@@ -118,8 +128,7 @@ extension TasksViewController {
             .disposed(by: disposeBag)
         
         output.taskCompleted
-            .asObservable()
-            .subscribe(onNext: { [weak self] result in
+            .drive(onNext: { [weak self] result in
                 switch result {
                 case .success(_):
                     self?.reloadTasks.accept(Void())
@@ -145,8 +154,9 @@ extension TasksViewController {
             .disposed(by: disposeBag)
     }
     
-    func presentNewTask() {
+    func presentNewTask(editing task: Task? = nil) {
         let newTaskVC = NewTaskVCFactory.make()
+        newTaskVC.setEditing(task: task)
         
         newTaskVC.dismissed
             .bind(to: reloadTasks)

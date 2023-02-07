@@ -21,7 +21,7 @@ final class NewTaskViewModel {
 extension NewTaskViewModel: ViewModel {
     struct Input {
         let description: Observable<String>
-        let addTask: Observable<Void>
+        let addTask: Observable<Task?>
     }
     
     struct Output {
@@ -34,11 +34,18 @@ extension NewTaskViewModel: ViewModel {
             .map { $0.count >= 3 }
         
         let taskAdded = input.addTask
-            .withLatestFrom(input.description)
-            .flatMapLatest { [taskService] taskDescription in
-                let task = Task(dueDate: Date(), description: taskDescription, completed: false)
-                
-                return taskService.rx.add(task: task)
+            .withLatestFrom(input.description) { ($0, $1) }
+            .flatMapLatest { [taskService] task, taskDescription in
+                let service: Single<Task>
+                if var task = task {
+                    task.description = taskDescription
+                    service = taskService.rx.update(task: task)
+                } else {
+                    let task = Task(dueDate: Date(), description: taskDescription, completed: false)
+                    service = taskService.rx.add(task: task)
+                }
+
+                return service
                     .asObservable()
                     .map { TaskResponse.success($0) }
                     .catch { Observable.just(.error($0)) }
