@@ -10,10 +10,13 @@ import RxSwift
 
 final class NewTaskViewModel {
     // MARK: Private properties
-    let taskService: TaskService
+    private let taskService: TaskService
+    private var suggestionsData: SuggestionData
+    private let disposeBag = DisposeBag()
     
     init(taskService: TaskService) {
         self.taskService = taskService
+        self.suggestionsData = DefaultSuggestionData()
     }
 }
 
@@ -25,11 +28,31 @@ extension NewTaskViewModel: ViewModel {
     }
     
     struct Output {
+        let suggestions: Driver<[String]>
+        let shouldShowDefaultTitle: Driver<Bool>
         let shouldEnableAddButton: Driver<Bool>
         let taskAdded: Driver<TaskResponse>
     }
     
     func connect(input: Input) -> Output {
+        let suggestions = input.description
+            .flatMapSorted(initialValue: [String](), { [weak self] description -> Observable<[String]> in
+                guard let self = self else {
+                    return Observable.error(APIError.systemError("Nil self"))
+                }
+                
+                if description.count >= 3 {
+                    self.suggestionsData = APISuggestionData(service: self.taskService, term: description)
+                } else {
+                    self.suggestionsData = DefaultSuggestionData()
+                }
+                
+                return self.suggestionsData.suggestions
+            })
+        
+        let shouldShowDefaultTitle = input.description
+            .map { $0.count < 3 }
+        
         let shouldEnableAddButton = input.description
             .map { $0.count >= 3 }
         
@@ -51,6 +74,10 @@ extension NewTaskViewModel: ViewModel {
                     .catch { Observable.just(.error($0)) }
             }
         
-        return Output(shouldEnableAddButton: shouldEnableAddButton.asDriver(onErrorJustReturn: false), taskAdded: taskAdded.asDriver(onErrorJustReturn: .error(APIError.systemError("Error on adding task"))))
+        return Output(
+            suggestions: suggestions.asDriver(onErrorJustReturn: []),
+            shouldShowDefaultTitle: shouldShowDefaultTitle.asDriver(onErrorJustReturn: true),
+            shouldEnableAddButton: shouldEnableAddButton.asDriver(onErrorJustReturn: false),
+            taskAdded: taskAdded.asDriver(onErrorJustReturn: .error(APIError.systemError("Error on adding task"))))
     }
 }
