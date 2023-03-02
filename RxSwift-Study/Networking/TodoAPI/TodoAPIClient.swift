@@ -23,6 +23,14 @@ final class TodoAPIClient: APIClient {
         var url = baseURL
         url.appendPathComponent(endpoint.path)
         
+        if let _ = endpoint.queryParameters, var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) {
+            urlComponents.queryItems = endpoint.queryItems
+            
+            if let newUrl = urlComponents.url {
+                url = newUrl
+            }
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

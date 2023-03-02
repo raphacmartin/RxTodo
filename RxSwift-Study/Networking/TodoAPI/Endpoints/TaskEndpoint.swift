@@ -71,4 +71,20 @@ class TasksEndpoint {
         
         let id: String?
     }
+    
+    struct Suggestions: Endpoint {
+        var path: String {
+            return "/tasks/suggestions"
+        }
+        
+        var method: HTTPMethod {
+            .GET
+        }
+        
+        var queryParameters: [String : String]? {
+            ["query": term]
+        }
+        
+        let term: String
+    }
 }

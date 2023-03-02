@@ -57,4 +57,16 @@ extension Reactive where Base: TaskService {
             }
         }
     }
+    
+    func getSuggestions(with term: String) -> Single<[String]> {
+        Single.create { single in
+            let networkTask = base.getSuggestions(with: term) { result in
+                single(result)
+            }
+            
+            return Disposables.create {
+                networkTask.cancel()
+            }
+        }
+    }
 }

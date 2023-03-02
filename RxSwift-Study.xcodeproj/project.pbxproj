@@ -18,11 +18,14 @@
 		BE1CA45D296B88B2005E2F14 /* TaskService+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA45C296B88B2005E2F14 /* TaskService+Rx.swift */; };
 		BE1CA45F296B8EA6005E2F14 /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA45E296B8EA6005E2F14 /* TasksViewModel.swift */; };
 		BE2B5417294682E900E974BA /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B5416294682E900E974BA /* SignUpViewModel.swift */; };
+		BE31D03C299A7C1F002A0D38 /* SuggestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE31D03B299A7C1F002A0D38 /* SuggestionData.swift */; };
 		BE3F42C529660BFD001A41EE /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F42C429660BFD001A41EE /* TasksViewController.swift */; };
 		BE3F42C7296615BC001A41EE /* TasksVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */; };
 		BE46FDCE297B25AD003FABF2 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46FDCD297B25AD003FABF2 /* NewTaskViewController.swift */; };
 		BE46FDD0297B25E3003FABF2 /* NewTaskVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE46FDCF297B25E3003FABF2 /* NewTaskVCFactory.swift */; };
+		BE4842B9299D1C3C0044B275 /* DefaultSuggestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4842B8299D1C3C0044B275 /* DefaultSuggestionData.swift */; };
 		BE4CC0ED297D74FF00194B74 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4CC0EC297D74FF00194B74 /* NewTaskViewModel.swift */; };
+		BE5A7E25299FC91B009B35CC /* APISuggestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5A7E24299FC91B009B35CC /* APISuggestionData.swift */; };
 		BE5EDBA9290AFB3100C994A4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */; };
 		BE5EDBAB290B038D00C994A4 /* ViewCodeBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */; };
 		BE613390292BA01700A28AE3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61338F292BA01700A28AE3 /* Endpoint.swift */; };
@@ -48,6 +51,7 @@
 		BECCB21B2979772B000E347D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECCB21A2979772B000E347D /* Extensions.swift */; };
 		BEDBB99E292E61B5006023E9 /* UIViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */; };
 		BEE3F681295DF82100CFB3AB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F680295DF82100CFB3AB /* Task.swift */; };
+		BEFAA21529A8FA9000A38C41 /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFAA21429A8FA9000A38C41 /* SuggestionCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,11 +67,14 @@
 		BE1CA45C296B88B2005E2F14 /* TaskService+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskService+Rx.swift"; sourceTree = "<group>"; };
 		BE1CA45E296B8EA6005E2F14 /* TasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
 		BE2B5416294682E900E974BA /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		BE31D03B299A7C1F002A0D38 /* SuggestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionData.swift; sourceTree = "<group>"; };
 		BE3F42C429660BFD001A41EE /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		BE3F42C6296615BC001A41EE /* TasksVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksVCFactory.swift; sourceTree = "<group>"; };
 		BE46FDCD297B25AD003FABF2 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		BE46FDCF297B25E3003FABF2 /* NewTaskVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskVCFactory.swift; sourceTree = "<group>"; };
+		BE4842B8299D1C3C0044B275 /* DefaultSuggestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSuggestionData.swift; sourceTree = "<group>"; };
 		BE4CC0EC297D74FF00194B74 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
+		BE5A7E24299FC91B009B35CC /* APISuggestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISuggestionData.swift; sourceTree = "<group>"; };
 		BE5EDBA8290AFB3100C994A4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BE5EDBAA290B038D00C994A4 /* ViewCodeBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeBuildable.swift; sourceTree = "<group>"; };
 		BE61338F292BA01700A28AE3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -95,6 +102,7 @@
 		BECCB21A2979772B000E347D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BEDBB99D292E61B5006023E9 /* UIViewController+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helper.swift"; sourceTree = "<group>"; };
 		BEE3F680295DF82100CFB3AB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		BEFAA21429A8FA9000A38C41 /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDFD253FA1FDE57C016E64BE /* Pods-RxSwift-Study.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-Study.debug.xcconfig"; path = "Target Support Files/Pods-RxSwift-Study/Pods-RxSwift-Study.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +144,15 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		BE31D03A299A7BFC002A0D38 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BE4842B7299D1B500044B275 /* Adapter */,
+				BE31D03B299A7C1F002A0D38 /* SuggestionData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		BE3F42C02965D51D001A41EE /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,11 +164,21 @@
 			path = Tasks;
 			sourceTree = "<group>";
 		};
+		BE4842B7299D1B500044B275 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				BE4842B8299D1C3C0044B275 /* DefaultSuggestionData.swift */,
+				BE5A7E24299FC91B009B35CC /* APISuggestionData.swift */,
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
 		BE4CC0EB297D74E600194B74 /* NewTask */ = {
 			isa = PBXGroup;
 			children = (
 				BE46FDCD297B25AD003FABF2 /* NewTaskViewController.swift */,
 				BE4CC0EC297D74FF00194B74 /* NewTaskViewModel.swift */,
+				BEFAA21429A8FA9000A38C41 /* SuggestionCollectionViewCell.swift */,
 			);
 			path = NewTask;
 			sourceTree = "<group>";
@@ -290,6 +317,7 @@
 		BEB82E80290821AC0075E6D9 /* RxSwift-Study */ = {
 			isa = PBXGroup;
 			children = (
+				BE31D03A299A7BFC002A0D38 /* Data */,
 				BE61339C292BC1B800A28AE3 /* Model */,
 				BEAF398A292822C600B4ED91 /* Networking */,
 				BEAF3989292822B800B4ED91 /* View */,
@@ -432,6 +460,7 @@
 				BE0D2EF329670E730081017D /* TaskTableViewCell.swift in Sources */,
 				BE46FDCE297B25AD003FABF2 /* NewTaskViewController.swift in Sources */,
 				BE61339E292BC1C500A28AE3 /* User.swift in Sources */,
+				BE31D03C299A7C1F002A0D38 /* SuggestionData.swift in Sources */,
 				BEB82E86290821AC0075E6D9 /* LoginViewController.swift in Sources */,
 				BE991717293B93C700353D47 /* LoginViewModel.swift in Sources */,
 				BE613390292BA01700A28AE3 /* Endpoint.swift in Sources */,
@@ -462,9 +491,12 @@
 				BE19CDC629297F2500273776 /* APIClient.swift in Sources */,
 				BE812AE62933EB4D00F1AB94 /* SignUpVCFactory.swift in Sources */,
 				BE19CDC929297F8300273776 /* AuthManaging.swift in Sources */,
+				BE4842B9299D1C3C0044B275 /* DefaultSuggestionData.swift in Sources */,
 				BE3F42C7296615BC001A41EE /* TasksVCFactory.swift in Sources */,
 				BECCB21B2979772B000E347D /* Extensions.swift in Sources */,
 				BE6133A4292BC70000A28AE3 /* UserService+Rx.swift in Sources */,
+				BE5A7E25299FC91B009B35CC /* APISuggestionData.swift in Sources */,
+				BEFAA21529A8FA9000A38C41 /* SuggestionCollectionViewCell.swift in Sources */,
 				BE6133A1292BC4FB00A28AE3 /* User+Decodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,7 @@ final class NewTaskViewController: BaseViewController {
     private let horizontalMargin = 20.0
     private let dismissRelay = PublishRelay<Void>()
     private var editingTask = BehaviorRelay<Task?>(value: nil)
+    private var suggestions = [String]()
     
     // MARK: Public properties
     public var dismissed: Observable<Void> {
@@ -89,6 +90,35 @@ final class NewTaskViewController: BaseViewController {
         
         return stackView
     }()
+    
+    private lazy var suggestionsTitleLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "Common tasks"
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
+        
+        return label
+    }()
+    
+    private lazy var collectionViewLayout: UICollectionViewCompositionalLayout = {
+        let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
+        let item = NSCollectionLayoutItem(layoutSize: size)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
+    }()
+    
+    private lazy var suggestionsCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(SuggestionCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: SuggestionCollectionViewCell.self))
+        
+        return collectionView
+    }()
 }
 
 // MARK: Lifecycle
@@ -103,6 +133,8 @@ extension NewTaskViewController {
         descriptionTextField.becomeFirstResponder()
         
         setupBindings()
+        
+        suggestionsCollectionView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,7 +151,9 @@ extension NewTaskViewController: ViewCodeBuildable {
             descriptionTextField,
             minCharLabel,
             addButton,
-            cancelButton
+            cancelButton,
+            suggestionsTitleLabel,
+            suggestionsCollectionView
         ].forEach {
             stackView.addArrangedSubview($0)
         }
@@ -131,6 +165,7 @@ extension NewTaskViewController: ViewCodeBuildable {
         stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.0).isActive = true
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalMargin).isActive = true
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalMargin).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
 
@@ -186,6 +221,19 @@ extension NewTaskViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        output.suggestions
+            .drive(onNext: { [weak self] suggestions in
+                self?.suggestions = suggestions
+                self?.suggestionsCollectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        output.shouldShowDefaultTitle
+            .map { !$0 }
+            .asObservable()
+            .bind(to: suggestionsTitleLabel.rx.isHidden)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -197,5 +245,32 @@ extension NewTaskViewController {
     ///     - task: The task to be editer
     public func setEditing(task: Task?) {
         self.editingTask.accept(task)
+    }
+}
+
+// MARK: Suggestions UICollectionViewDataSource
+extension NewTaskViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return suggestions.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SuggestionCollectionViewCell.self), for: indexPath) as? SuggestionCollectionViewCell else {
+            fatalError("Unable to dequeue cell")
+        }
+        
+        cell.configure(description: suggestions[indexPath.row])
+        
+        return cell
+    }
+}
+
+// MARK: Suggestions UICollectionViewDelegate
+extension NewTaskViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let suggestion = suggestions[indexPath.row]
+        
+        descriptionTextField.text = suggestion
+        descriptionTextField.sendActions(for: .valueChanged)
     }
 }

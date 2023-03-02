@@ -91,6 +91,24 @@ extension TaskService {
             }
         }
     }
+    
+    public func getSuggestions(with term: String, completion: @escaping (Result<[String], Error>) -> Void) -> URLSessionTask {
+        let endpoint = TasksEndpoint.Suggestions(term: term)
+        
+        return apiClient.request(from: endpoint) { [weak self] result in
+            switch result {
+            case .success(let data):
+                guard let suggestions = self?.decodeListOfString(data: data) else {
+                    completion(.failure(APIError.invalidData))
+                    return
+                }
+                
+                completion(.success(suggestions))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 // MARK: Private API
@@ -127,5 +145,20 @@ extension TaskService {
         }
         
         return task
+    }
+    
+    private func decodeListOfString(data: Data) -> [String]? {
+        let decoder = JSONDecoder()
+        
+        guard let suggestions = try? decoder.decode([String].self, from: data) else {
+            if let jsonData = String(data: data, encoding: .utf8) {
+                print("Error decoding data to a task: ")
+                print(jsonData)
+            }
+            
+            return nil
+        }
+        
+        return suggestions
     }
 }
