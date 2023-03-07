@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TasksVCFactory: ViewControllerFactoring {
+final class TasksVCFactory: ViewControllerFactoring {
     public static func make() -> TasksViewController {
         let apiUrl = Environment.apiUrl
         let todoApiClient = TodoAPIClient(baseURL: apiUrl)

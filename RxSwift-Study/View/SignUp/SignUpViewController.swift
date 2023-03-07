@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SignUpViewController: BaseViewController {
+final class SignUpViewController: BaseViewController {
     // MARK: Private properties
     let viewModel: SignUpViewModel
     

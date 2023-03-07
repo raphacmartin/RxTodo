@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginVCFactory: ViewControllerFactoring {
+final class LoginVCFactory: ViewControllerFactoring {
     public static func make() -> LoginViewController {
         let apiUrl = Environment.apiUrl
         let todoApiClient = TodoAPIClient(baseURL: apiUrl)

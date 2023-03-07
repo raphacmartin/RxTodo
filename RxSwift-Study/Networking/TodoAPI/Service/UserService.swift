@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserService {
+final class UserService {
     // MARK: Private properties
     private let apiClient: APIClient
     private var authManager: AuthManaging

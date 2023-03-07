@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TaskService {
+final class TaskService {
     // MARK: Private properties
     private let apiClient: APIClient
     private var authManager: AuthManaging

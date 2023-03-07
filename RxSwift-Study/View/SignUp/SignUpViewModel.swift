@@ -14,7 +14,7 @@ enum SignupResponse {
     case error(Error)
 }
 
-class SignUpViewModel {
+final class SignUpViewModel {
     public let minimumValidPasswordLength = 6
     public let maximumValidPasswordLength = 16
     
