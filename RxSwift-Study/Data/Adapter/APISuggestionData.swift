@@ -7,7 +7,7 @@
 
 import RxSwift
 
-class APISuggestionData: SuggestionData {
+final class APISuggestionData: SuggestionData {
     // MARK: Private properties
     private var service: TaskService
     private var term: String

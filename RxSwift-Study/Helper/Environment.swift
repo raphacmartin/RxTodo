@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Environment {
+public final class Environment {
     public static var apiUrl: URL {
         guard let _apiUrl = Bundle.main.object(forInfoDictionaryKey: "ApiUrl") as? String, let _apiUrl = URL(string: _apiUrl) else {
             fatalError("Unable to read the API URL from the Info.plist file")

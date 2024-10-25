@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class TaskTableViewCell: UITableViewCell {
+final class TaskTableViewCell: UITableViewCell {
     // MARK: Private properties
     private var task: Task? {
         didSet {

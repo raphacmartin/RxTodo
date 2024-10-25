@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxRelay
 
-class TasksViewController: BaseViewController {
+final class TasksViewController: BaseViewController {
     // MARK: Private properties
     private var tasks = [Task]()
     private let viewModel: TasksViewModel

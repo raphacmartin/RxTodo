@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SuggestionCollectionViewCell: UICollectionViewCell {
+final class SuggestionCollectionViewCell: UICollectionViewCell {
     // MARK: UI Components
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()

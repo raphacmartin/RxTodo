@@ -5,7 +5,7 @@
 //  Created by Raphael Martin on 11/21/22.
 //
 
-class UserEndpoint {
+final class UserEndpoint {
     fileprivate static let basePath = "/users"
     
     struct Login {

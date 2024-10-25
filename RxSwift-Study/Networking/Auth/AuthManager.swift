@@ -5,7 +5,7 @@
 //  Created by Raphael Martin on 11/19/22.
 //
 
-class AuthManager: AuthManaging {
+final class AuthManager: AuthManaging {
     var bearerToken: String?
     
     // MARK: Singleton
